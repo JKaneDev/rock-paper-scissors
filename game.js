@@ -57,41 +57,41 @@ function playRound(playerSelection, computerSelection) {
   }
 
   
-  function game(playerSelection, computerSelection) {
+//   function game(playerSelection, computerSelection) {
 
-    const validate_winner = 'You Win!'
-    const validate_loser = 'You Lose!'
-    const validate_tie = "TIE!"
+//     const validate_winner = 'You Win!'
+//     const validate_loser = 'You Lose!'
+//     const validate_tie = "TIE!"
 
-    for (let i = 0; i < 5; i++) {
-        result = playRound(playerSelection, computerSelection);
+//     for (let i = 0; i < 5; i++) {
+//         result = playRound(playerSelection, computerSelection);
         
-        if (result.includes(validate_winner)) {
-            playerScore++;
-        }
+//         if (result.includes(validate_winner)) {
+//             playerScore++;
+//         }
         
-        else if (result.includes(validate_loser)) {
-            computerScore++;
-        }
+//         else if (result.includes(validate_loser)) {
+//             computerScore++;
+//         }
 
-        else if (result.includes(validate_tie)) {
-            playerScore++;
-            computerScore++;
-        }
-    }
+//         else if (result.includes(validate_tie)) {
+//             playerScore++;
+//             computerScore++;
+//         }
+//     }
 
-    if (playerScore > computerScore) {
-        console.log("You are the winner!");
-    }
+//     if (playerScore > computerScore) {
+//         console.log("You are the winner!");
+//     }
 
-    else if (computerScore > playerScore) {
-        console.log("Computer Wins! You Suck!");
-    }
+//     else if (computerScore > playerScore) {
+//         console.log("Computer Wins! You Suck!");
+//     }
 
-    else {
-        console.log('TIE!');
-    }
+//     else {
+//         console.log('TIE!');
+//     }
 
-    console.log(playerScore, computerScore);
-    }
+//     console.log(playerScore, computerScore);
+//     }
 
