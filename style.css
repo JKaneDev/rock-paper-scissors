@@ -42,9 +42,10 @@ h2 {
     text-align: center;
     background-color: #B47846;
     padding-top: 2rem;
+    max-height: 220px;
 }
 
-.human img:hover, .computer img:hover {
+.human img:hover {
     transform: scale(1.1);
     transition: 0.3s;
     border-color: steelblue;
@@ -54,9 +55,28 @@ h2 {
 .scores {
     display: flex;
     justify-content: center;
-    gap: 25rem;
+    gap: 10rem;
     margin-top: 0px;
     text-align: center;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #B47846;
+    border-radius: 32px;
+    padding: 12px;
+    text-align: center;
+    max-height: 80px;
+}
+
+.refresh {
+    max-height: 6vw;
+    max-width: 6vw;
+    padding-top: 25px;
+    position: relative;
+    left: 15px;
 }
 
 

@@ -7,8 +7,16 @@ let winner;
 let playerScore = 0;
 let computerScore = 0;
 
+const rock = document.getElementById('rock').addEventListener('click', playRound);
+const paper = document.getElementById('paper').addEventListener('click', playRound);
+const scissors = document.getElementById('scissors').addEventListener('click', playRound);
+const refresh = document.querySelector('.refresh').addEventListener('click', playAgain);
 
-console.log(game(playerSelection, computerSelection));
+const resultDiv = document.querySelector('.result');
+let resultMessage = document.createElement('div');
+
+let liveHumanScore = document.getElementById('updateHumanScore');
+let liveComputerScore = document.getElementById('updateComputerScore');
 
 function getComputerChoice() {
     // Get random number to index into array 
@@ -21,7 +29,9 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = prompt("Choose Your Weapon: ").toLowerCase();
+    clearResult();
+    playerSelection = this.id;
+    console.log(playerScore, computerScore, 'id');
     computerSelection = getComputerChoice();
     
     switch (true) {
@@ -29,7 +39,7 @@ function playRound(playerSelection, computerSelection) {
             result = 'You lose! Paper Beats Rock'
             break;
         case (playerSelection == 'rock' && computerSelection == 'scissors'):
-            result = 'You Win! Rock Beats Scissors';           
+            result = 'You Win! Rock Beats Scissors';         
             break;
         case (playerSelection == 'rock' && computerSelection == 'rock'):
             result = 'TIE!'
@@ -53,45 +63,73 @@ function playRound(playerSelection, computerSelection) {
             result = 'You Lose! Rock Beats Paper'
             break;
     }
+    updateScore(result);
+    updateResult(result);
+    console.log(playerScore, computerScore, 'US');
+    gameEnd(playerScore, computerScore);
     return result;
   }
 
   
-//   function game(playerSelection, computerSelection) {
-
-//     const validate_winner = 'You Win!'
-//     const validate_loser = 'You Lose!'
-//     const validate_tie = "TIE!"
-
-//     for (let i = 0; i < 5; i++) {
-//         result = playRound(playerSelection, computerSelection);
+function gameEnd(playerScore, computerScore, result) {
+    if (playerScore == 5 || computerScore == 5) {
+        clearResult();
         
-//         if (result.includes(validate_winner)) {
-//             playerScore++;
-//         }
-        
-//         else if (result.includes(validate_loser)) {
-//             computerScore++;
-//         }
+        document.getElementById('rock').removeEventListener('click', playRound);
+        document.getElementById('paper').removeEventListener('click', playRound);
+        document.getElementById('scissors').removeEventListener('click', playRound);
 
-//         else if (result.includes(validate_tie)) {
-//             playerScore++;
-//             computerScore++;
-//         }
-//     }
+        endGameMessage(playerScore, computerScore);
+    }
+}
 
-//     if (playerScore > computerScore) {
-//         console.log("You are the winner!");
-//     }
+function updateResult(result) {
+    resultMessage.classList.add('resultMessage');
+    resultMessage.textContent = result;
 
-//     else if (computerScore > playerScore) {
-//         console.log("Computer Wins! You Suck!");
-//     }
+    resultDiv.appendChild(resultMessage);
+    resultDiv.style.display = 'flex';
+    resultDiv.style.flexDirection = 'column';
+    resultDiv.style.justifyContent = 'center';
+    resultDiv.style.alignItems = 'center';
+    resultMessage.style.fontWeight = 'bold';
 
-//     else {
-//         console.log('TIE!');
-//     }
 
-//     console.log(playerScore, computerScore);
-//     }
+}
 
+function endGameMessage(playerScore, computerScore) {
+    clearResult();
+    if (playerScore > computerScore) {
+        resultMessage.textContent = 'You Win! Refresh To Play Again';
+    }
+    else if (computerScore > playerScore) {
+        resultMessage.textContent = 'You Lose! Refresh To Play Again';
+    }
+    else {
+        resultMessage.textContent = 'TIE GAME! Refresh To Play Again';
+    }
+}
+
+function clearResult() {
+    resultMessage.textContent = '';
+}
+
+function updateScore(result) {
+        if (result.includes('You Win!')) {
+            ++playerScore;
+        }
+        else if (result.includes('You Lose!')) {
+            ++computerScore;
+        }
+        else {
+            ++playerScore;
+            ++computerScore;
+        }
+
+    liveHumanScore.textContent = `${playerScore}`;
+    liveComputerScore.textContent = `${computerScore}`;
+}
+
+function playAgain() {
+    window.location.reload();
+}
